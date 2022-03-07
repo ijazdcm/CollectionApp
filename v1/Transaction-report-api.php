@@ -17,42 +17,29 @@ $db = new Database();
 $connection = $db->Connect();
 
 $customer_obj = new Customer($connection);
-$util=new Util();
+$util = new Util();
 
-if($_SERVER['REQUEST_METHOD'] === "POST"){
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
 
     $data = json_decode(file_get_contents("php://input"));
-    $from_date=$data->fromdate;
-    $to_date=$data->todate;
+    $from_date = $data->fromdate;
+    $to_date = $data->todate;
 
-      //validating the feilds or not null
-      if($util->validate_is_empty($from_date))
-      {
-            if($util->validate_is_empty($to_date))
-            {
-                $reponse=$customer_obj->super_transaction($from_date,$to_date);
-                http_response_code(200);
-                echo json_encode(["status"=>"1","data"=>$reponse]);
-            }
-            else
-            {
-                http_response_code(200);
-                echo json_encode(["status"=>"0","data"=>"To Date is Empty"]);
-            }
-      }
-      else
-      {
+    //validating the feilds or not null
+    if ($util->validate_is_empty($from_date)) {
+        if ($util->validate_is_empty($to_date)) {
+            $response = $customer_obj->super_transaction($from_date, $to_date);
+            http_response_code(200);
+            echo json_encode(["status" => "1", "data" => $response]);
+        } else {
+            http_response_code(200);
+            echo json_encode(["status" => "0", "data" => "To Date is Empty"]);
+        }
+    } else {
         http_response_code(200);
-        echo json_encode(["status"=>"0","data"=>"From Date is Empty"]);
-
-      }
-
-
-
-
-}
-else
-{
+        echo json_encode(["status" => "0", "data" => "From Date is Empty"]);
+    }
+} else {
     http_response_code(403);
-    echo json_encode(["status"=>"0","data"=>"This Api Supports Only POST Method"]);
+    echo json_encode(["status" => "0", "data" => "This Api Supports Only POST Method"]);
 }
