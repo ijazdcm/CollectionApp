@@ -29,7 +29,10 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
        {
            $response_data[$key]=$plan;
        }
-       echo json_encode(["status"=>"1","data"=>$response_data]);
+       
+    //   print_r($response_data);
+       
+      echo json_encode(["status"=>"1","data"=>$response_data]);
      
 }
 else

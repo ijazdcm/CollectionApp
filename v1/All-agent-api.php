@@ -29,7 +29,7 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
        {
            $response_data[$key]=$agent;
        }
-       echo json_encode(["status"=>"1","data"=>$response_data]);
+       echo json_encode(["status"=>"1","data"=>$response_data],JSON_INVALID_UTF8_IGNORE);
      
 }
 else

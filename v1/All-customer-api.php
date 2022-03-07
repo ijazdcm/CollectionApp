@@ -30,12 +30,12 @@ if($_SERVER['REQUEST_METHOD'] === "GET"){
    {
        $response_data[$key]=$customer;
    }
-   echo json_encode(["status"=>"1","data"=>$response_data]);
+   echo json_encode(["status"=>"1","data"=>$response_data],JSON_INVALID_UTF8_IGNORE);
   
   
 }
 else
 {
     http_response_code(403);
-    echo json_encode(["status"=>"0","data"=>"This Api Supports Only Get Methode"]);
+    echo json_encode(["status"=>"0","data"=>"This Api Supports Only Get Method"]);
 }

@@ -21,16 +21,19 @@ $place_obj = new Places($connection);
 
 if($_SERVER['REQUEST_METHOD'] === "GET"){
 
-   $data = json_decode(file_get_contents("php://input"));
+        $data = json_decode(file_get_contents("php://input"));
     
        $data=$place_obj->get_all_place();
+       
        $response_data=array();
+       
        foreach($data as $key=>$place)
        {
            $response_data[$key]=$place;
        }
-       echo json_encode(["status"=>"1","data"=>$response_data]);
-     
+       
+        echo json_encode(["status"=>"1","data"=>$response_data],JSON_INVALID_UTF8_IGNORE);
+
 }
 else
 {

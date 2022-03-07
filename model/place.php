@@ -50,10 +50,10 @@
     public function get_all_place()
     {
        
-        $sql="SELECT `PLACE_ID`,`PLACE_NAME` FROM ".$this->table_name." ";
+        $sql="SELECT `PLACE_ID`,`PLACE_NAME` FROM ".$this->table_name." ORDER BY PLACE_ID";
         $stmt=$this->conn->prepare($sql);
-       
-         
+        
+     
         try{
          $stmt->execute();
          $all_places_fetched=$stmt->fetchall(PDO::FETCH_ASSOC);
