@@ -49,9 +49,9 @@ class Customer
     {
         if ($this->util::validate_is_empty($data->user_id)) {
             if ($this->util::validate_is_empty($data->cus_name)) {
-                // if ($this->util::validate_is_empty($data->cus_sur_name)) {
-                    // if ($this->util::validate_is_empty($data->cus_pm_ph_no) || true) {
-                        // if ($this->util::validate_phonenumber_length($data->cus_pm_ph_no) || true) {
+                if ($this->util::validate_is_empty($data->cus_sur_name)) {
+                    if ($this->util::validate_is_empty($data->cus_pm_ph_no) || true) {
+                        if ($this->util::validate_phonenumber_length($data->cus_pm_ph_no) || true) {
                             if ($this->util::validate_is_empty($data->cus_place_id)) {
                                 if ($this->util::validate_is_empty($data->cus_ref_by)) {
                                     if ($this->util::validate_is_empty($data->cus_pl_id)) {
@@ -83,72 +83,66 @@ class Customer
                                 http_response_code(200);
                                 echo json_encode(["status" => "0", "data" => "Choose the Customer Place"]);
                             }
-                        // } else {
-                        //     http_response_code(200);
-                        //     echo json_encode(["status" => "0", "data" => "Enter a Valid Phone Number"]);
-                        // }
-                    // } else {
-                    //     http_response_code(200);
-                    //     echo json_encode(["status" => "0", "data" => "Customer Phone Number Feild is Empty"]);
-                    // }
-                // } else {
-                //     http_response_code(200);
-                //     echo json_encode(["status" => "0", "data" => "Customer Sur Name Feild is Empty"]);
-                // }
-            } else {
-                http_response_code(200);
-                echo json_encode(["status" => "0", "data" => "Customer Name Field is Empty"]);
-            }
-        } else {
-            http_response_code(200);
-            echo json_encode(["status" => "0", "data" => "User Id Field is Empty"]);
-        }
-    }
-
-    public function validate_user_info_feild_on_update($data)
-    {
-        if ($this->util::validate_is_empty($data->user_id)) {
-            if ($this->util::validate_is_empty($data->cus_name)) {
-                // if ($this->util::validate_is_empty($data->cus_sur_name)) {
-                    // if ($this->util::validate_is_empty($data->cus_pm_ph_no) || true) {
-                        // if ($this->util::validate_phonenumber_length($data->cus_pm_ph_no) || true) {
-                            if ($this->util::validate_is_empty($data->cus_place_id)) {
-                                $this->user_id = $data->user_id;
-                                $this->cus_name = $data->cus_name;
-                                $this->cus_sur_name = $data->cus_sur_name;
-                                $this->cus_pr_ph_no = $data->cus_pm_ph_no;
-                                $this->cus_se_ph_no = $data->cus_se_ph_no;
-                                $this->cus_place_id = $data->cus_place_id;
-                                $this->cus_com_one = $data->cus_com_one;
-                                $this->cus_com_two = $data->cus_com_two;
-                                $this->cus_id = $data->cus_id;
-                                return true;
-                            } else {
-                                http_response_code(200);
-                                echo json_encode(["status" => "0", "data" => "Choose the Customer Place"]);
-                            }
-                        // } else {
-                        //     http_response_code(200);
-                        //     echo json_encode(["status" => "0", "data" => "Enter a Valid Phone Number"]);
-                        // }
-                    // } else {
-                    //     http_response_code(200);
-                    //     echo json_encode(["status" => "0", "data" => "Customer Phone Number Feild is Empty"]);
-                    // }
-                // } else {
-                //     http_response_code(200);
-                //     echo json_encode(["status" => "0", "data" => "Customer Sur Name Feild is Empty"]);
-                // }
+                        } else {
+                            http_response_code(200);
+                            echo json_encode(["status" => "0", "data" => "Enter a Valid Phone Number"]);
+                        }
+                    } else {
+                        http_response_code(200);
+                        echo json_encode(["status" => "0", "data" => "Customer Phone Number Feild is Empty"]);
+                    }
+                } else {
+                    http_response_code(200);
+                    echo json_encode(["status" => "0", "data" => "Customer Sur Name Feild is Empty"]);
+                }
             } else {
                 http_response_code(200);
                 echo json_encode(["status" => "0", "data" => "Customer Name Feild is Empty"]);
             }
         } else {
             http_response_code(200);
-            echo json_encode(["status" => "0", "data" => "User Id Field is Empty"]);
+            echo json_encode(["status" => "0", "data" => "Customer ID Feild is Empty"]);
         }
     }
+    public function validate_user_info_feild_on_update($data)
+    {
+        if ($this->util::validate_is_empty($data->cus_name)) {
+            if ($this->util::validate_is_empty($data->cus_sur_name)) {
+                if ($this->util::validate_is_empty($data->cus_pm_ph_no) || true) {
+                    if ($this->util::validate_phonenumber_length($data->cus_pm_ph_no) || true) {
+                        if ($this->util::validate_is_empty($data->cus_place_id)) {
 
+
+                            $this->cus_name = $data->cus_name;
+                            $this->cus_sur_name = $data->cus_sur_name;
+                            $this->cus_pr_ph_no = $data->cus_pm_ph_no;
+                            $this->cus_se_ph_no = $data->cus_se_ph_no;
+                            $this->cus_place_id = $data->cus_place_id;
+                            $this->cus_com_one = $data->cus_com_one;
+                            $this->cus_com_two = $data->cus_com_two;
+                            $this->cus_id = $data->cus_id;
+                            return true;
+                        } else {
+                            http_response_code(200);
+                            echo json_encode(["status" => "0", "data" => "Choose the Customer Place"]);
+                        }
+                    } else {
+                        http_response_code(200);
+                        echo json_encode(["status" => "0", "data" => "Enter a Valid Phone Number"]);
+                    }
+                } else {
+                    http_response_code(200);
+                    echo json_encode(["status" => "0", "data" => "Customer Phone Number Feild is Empty"]);
+                }
+            } else {
+                http_response_code(200);
+                echo json_encode(["status" => "0", "data" => "Customer Sur Name Feild is Empty"]);
+            }
+        } else {
+            http_response_code(200);
+            echo json_encode(["status" => "0", "data" => "Customer Name Feild is Empty"]);
+        }
+    }
     public function check_customer_exist()
     {
         $sql = "SELECT * FROM " . $this->table_name . " WHERE CUS_PM_PH_NO='" . $this->cus_pr_ph_no . "'";
@@ -161,12 +155,12 @@ class Customer
             echo $e;
         }
     }
-
     public function get_all_customer()
     {
 
         // $sql="SELECT * FROM ".$this->table_name.",plan_master,place_master,agent_master WHERE `CUS_PLACE_ID`=place_master.PLACE_ID AND `CUS_REF_BY`= agent_master.AGENT_ID AND `CUS_PLAN_ID`=plan_master.PL_ID; ";
-        $sql = "SELECT * FROM " . $this->table_name . ",plan_master,place_master,agent_master WHERE `CUS_PLACE_ID`=place_master.PLACE_ID AND `CUS_REF_BY`= agent_master.AGENT_ID AND `CUS_PLAN_ID`=plan_master.PL_ID AND `CUS_DL_STATUS`!= 0 ORDER BY USER_ID; ";
+        // $sql="SELECT * FROM ".$this->table_name.",plan_master,place_master,agent_master WHERE `CUS_PLACE_ID`=place_master.PLACE_ID AND `CUS_REF_BY`= agent_master.AGENT_ID AND `CUS_PLAN_ID`=plan_master.PL_ID AND `CUS_DL_STATUS`!= 0; ";
+        $sql = "SELECT * FROM " . $this->table_name . ",plan_master,place_master,agent_master WHERE `CUS_PLACE_ID`=place_master.PLACE_ID AND `CUS_REF_BY`= agent_master.AGENT_ID AND `CUS_PLAN_ID`=plan_master.PL_ID AND `CUS_DL_STATUS`!= 0 ORDER BY customer_master.USER_ID; ";
         $stmt = $this->conn->prepare($sql);
 
 
@@ -199,14 +193,12 @@ class Customer
     public function searchCustomer($data)
     {
         // $sql = "SELECT * FROM " . $this->table_name ." WHERE `CUS_NAME` like '%" . $data . "%' OR `CUS_PM_PH_NO` like '%" . $data . "%' OR `CUS_ID` like '%".$data."%'";
-        // $sql = "SELECT * FROM " . $this->table_name ." WHERE `CUS_NAME` like '%" . $data . "%' OR `CUS_PM_PH_NO` like '%" . $data . "%' OR `CUS_ID` like '%".$data."%' AND `CUS_DL_STATUS`!= 0";
-        $sql = "SELECT * FROM " . $this->table_name . " WHERE `CUS_NAME` like '%" . $data . "%' OR `CUS_PM_PH_NO` like '%" . $data . "%' OR `USER_ID` like '%" . $data . "%' AND `CUS_DL_STATUS`!= 0";
+        $sql = "SELECT * FROM " . $this->table_name . " WHERE `CUS_NAME` like '%" . $data . "%' OR `CUS_PM_PH_NO` like '%" . $data . "%' OR `CUS_ID` like '%" . $data . "%' AND `CUS_DL_STATUS`!= 0";
         $stmt = $this->conn->prepare($sql);
 
         try {
             $stmt->execute();
             $customer_fetched = $stmt->fetchall(PDO::FETCH_ASSOC);
-            //  var_dump($customer_fetched);
             return $customer_fetched;
         } catch (PDOException $e) {
             echo $e;
@@ -239,7 +231,8 @@ class Customer
                 if ($stmt->execute()) {
                     $plan_amount_fetch = $stmt->fetchall(PDO::FETCH_ASSOC);
 
-                    $planAmount = (number_format($plan_amount_fetch[0]['PL_AMOUNT'])) * 12;
+                    $planAmount = $plan_amount_fetch[0]['PL_AMOUNT'] * 12;
+                    print_r($planAmount);
 
                     $sql = "INSERT INTO `collection_master`(`COL_FOR_CUS_ID`, `CUS_TOTAL_DUE`, `COL_DUE_BALANCE`)
                         VALUES (
@@ -274,7 +267,6 @@ class Customer
     {
         $sql = "UPDATE " . $this->table_name . "
          SET
-        `USER_ID`=:user_id,
         `CUS_NAME`=:cus_name,
         `CUS_SUR_NAME`=:cus_sur_name,
         `CUS_PM_PH_NO`=:cus_ph_no,
@@ -283,7 +275,6 @@ class Customer
         `CUS_COM_ONE`=:cus_com_one,
         `CUS_COM_TWO`=:cus_com_two WHERE `CUS_ID`=:id";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam('user_id', $this->user_id);
         $stmt->bindParam('cus_name', $this->cus_name);
         $stmt->bindParam('cus_sur_name', $this->cus_sur_name);
         $stmt->bindParam('cus_ph_no', $this->cus_pr_ph_no);
@@ -346,6 +337,33 @@ class Customer
         $stmt = $this->conn->prepare($sql);
         return $stmt->execute() ? true : false;
     }
+
+    public function super_complement_update_multiple(array $array)
+    {
+
+        $list = '';
+        // $list='1159';
+
+        for ($i = 0, $length = count($array); $i < $length; $i++) {
+
+            if ($i === 0) {
+                $list .= $array[$i];
+            } elseif ($i === $length) {
+
+                $list .= $array[$i];
+            } else {
+                $list .= "," . $array[$i];
+            }
+        }
+
+
+
+        $sql = "UPDATE `customer_master` SET `CUS_COM_TWO`='1' WHERE `CUS_ID` IN ({$list})";
+
+        $stmt = $this->conn->prepare($sql);
+        return $stmt->execute() ? true : false;
+    }
+
 
     public function super_count_by_plan()
     {
@@ -433,10 +451,24 @@ class Customer
         }
     }
 
+    // public function delete_user()
+    // {
+    //     $sql = "UPDATE " . $this->table_name . " SET `CUS_DL_STATUS`=0 WHERE `CUS_ID`=:id";
+    //     $stmt = $this->conn->prepare($sql);
+    //     $stmt->bindParam('id', $this->user_id);
+
+    //     try {
+
+    //         return ($stmt->execute()) ? true : false;
+    //     } catch (PDOException $e) {
+    //         echo $e;
+    //     }
+    // }
+
+
     public function delete_user()
     {
-        $sql="UPDATE ".$this->table_name." SET `CUS_DL_STATUS`=0 WHERE `CUS_ID`=:id";
-        // $sql = "UPDATE " . $this->table_name . " SET `CUS_DL_STATUS`=0 WHERE `USER_ID`=:id";
+        $sql = "UPDATE " . $this->table_name . " SET `CUS_DL_STATUS`=0 WHERE `CUS_ID`=:id";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam('id', $this->user_id);
 

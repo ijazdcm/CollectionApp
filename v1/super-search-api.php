@@ -29,7 +29,8 @@ if ($_SERVER['REQUEST_METHOD'] === "POST") {
    {
        $response_data[$key]=$customer;
    }
-   echo json_encode(["status"=>"1","data"=>$response_data]);
+   echo json_encode(["status"=>"1","data"=>$response_data],JSON_INVALID_UTF8_IGNORE);
+//   echo json_last_error_msg();
   }
 else {
     

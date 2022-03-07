@@ -50,7 +50,7 @@
     public function get_all_plan()
     {
        
-        $sql="SELECT `PL_ID`,`PL_AMOUNT` FROM ".$this->table_name." ";
+        $sql="SELECT `PL_ID`,`PL_AMOUNT` FROM ".$this->table_name." ORDER BY PL_ID";
         $stmt=$this->conn->prepare($sql);
        
          
@@ -66,6 +66,3 @@
 
     }
  }
-
-
-?>

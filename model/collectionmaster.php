@@ -5,7 +5,7 @@ class collection_list
 
    private $conn;
    private $table_name;
-   private $trascation;
+   private $transaction;
    private $months;
    private $plan_id;
 
@@ -15,8 +15,7 @@ class collection_list
       $this->conn = $db;
       $this->table_name = "collection_master";
       $this->months = 12;
-      $this->trascation = "transaction_master";
-
+      $this->transaction = "transaction_master";
    }
 
    public function all_collection_list()
@@ -60,41 +59,38 @@ class collection_list
    public function pay_due($cus_id, $amount_paid, $pay_by)
    {
 
-      $sql = "SELECT * FROM ".$this->table_name." WHERE `COL_FOR_CUS_ID`=".$cus_id." AND `COL_DUE_BALANCE` != 0" ;
+      $sql = "SELECT * FROM " . $this->table_name . " WHERE `COL_FOR_CUS_ID`=" . $cus_id . " AND `COL_DUE_BALANCE` != 0";
       $stmt = $this->conn->prepare($sql);
 
       if ($stmt->execute()) {
 
          $collect_data = $stmt->fetchall(PDO::FETCH_ASSOC);
-         if(count($collect_data)>0)
-         {
+         //var_dump($collect_data);
+         if (count($collect_data) > 0) {
             $check_bal = $collect_data[0]['COL_DUE_BALANCE'];
 
-            if($check_bal < $amount_paid ){ // Checking Existing Loan Amount
+            if ($check_bal < $amount_paid) { // Checking Existing Loan Amount
                return false;
             }
             // Updating Due Amount
-            $amount_last_balance=$collect_data[0]['COL_DUE_BALANCE'];
+            $amount_last_balance = $collect_data[0]['COL_DUE_BALANCE'];
             $payAmount = $collect_data[0]['COL_DUE_BALANCE'] - $amount_paid;
-            $sql="UPDATE `collection_master` SET `COL_DUE_BALANCE`=".$payAmount.",`COL_DUE_LAST_BALANCE`=".$amount_last_balance." WHERE `COL_FOR_CUS_ID`=".$cus_id;
+            $sql = "UPDATE `collection_master` SET `COL_DUE_BALANCE`=" . $payAmount . ",`COL_DUE_LAST_BALANCE`=" . $amount_last_balance . " WHERE `COL_FOR_CUS_ID`=" . $cus_id;
             $stmt = $this->conn->prepare($sql);
 
             if ($stmt->execute()) {
-               // Updating Transction
-               $sql="INSERT INTO `transaction_master`(`TR_OF_CUS`,`TR_DONE_TO`, `TR_PAID_AMOUNT`)
-               VALUES (".$cus_id.",".$pay_by.",".$amount_paid.")";
+               // Updating Transaction
+               $sql = "INSERT INTO `transaction_master`(`TR_OF_CUS`,`TR_DONE_TO`, `TR_PAID_AMOUNT`)
+               VALUES (" . $cus_id . "," . $pay_by . "," . $amount_paid . ")";
                $stmt = $this->conn->prepare($sql);
 
                if ($stmt->execute()) {
                   return true;
                }
             }
-         }
-         else{
+         } else {
             return false; //cannot pay because payed full amount
          }
-
       }
    }
-
 }

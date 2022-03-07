@@ -21,10 +21,11 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 
    $data = json_decode(file_get_contents("php://input"));
       
-
    if($customer_obj->super_complement_update_multiple($data->list))
    {
       http_response_code(200);
+      //print_r($data);
+      //echo (json_encode($data));
       echo json_encode(["status"=>"1","data"=>"Complement Updated For selected User"]);
    }
    else
@@ -37,5 +38,5 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
 else
 {
     http_response_code(403);
-    echo json_encode(["status"=>"0","data"=>"This Api Supports Only Post Methode"]);
+    echo json_encode(["status"=>"0","data"=>"This Api Supports Only Post Method"]);
 }
