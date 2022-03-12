@@ -160,7 +160,8 @@ class Customer
 
         // $sql="SELECT * FROM ".$this->table_name.",plan_master,place_master,agent_master WHERE `CUS_PLACE_ID`=place_master.PLACE_ID AND `CUS_REF_BY`= agent_master.AGENT_ID AND `CUS_PLAN_ID`=plan_master.PL_ID; ";
         // $sql="SELECT * FROM ".$this->table_name.",plan_master,place_master,agent_master WHERE `CUS_PLACE_ID`=place_master.PLACE_ID AND `CUS_REF_BY`= agent_master.AGENT_ID AND `CUS_PLAN_ID`=plan_master.PL_ID AND `CUS_DL_STATUS`!= 0; ";
-        $sql = "SELECT * FROM " . $this->table_name . ",plan_master,place_master,agent_master WHERE `CUS_PLACE_ID`=place_master.PLACE_ID AND `CUS_REF_BY`= agent_master.AGENT_ID AND `CUS_PLAN_ID`=plan_master.PL_ID AND `CUS_DL_STATUS`= 1 ORDER BY customer_master.USER_ID; ";
+        $sql = "SELECT * FROM " . $this->table_name . ",plan_master,place_master,agent_master WHERE `CUS_PLACE_ID`=place_master.PLACE_ID AND `CUS_REF_BY`= agent_master.AGENT_ID AND `CUS_PLAN_ID`=plan_master.PL_ID AND `CUS_DL_STATUS`= 1 ORDER BY customer_master.USER_ID";
+
         $stmt = $this->conn->prepare($sql);
 
 
@@ -193,7 +194,9 @@ class Customer
     public function searchCustomer($data)
     {
         // $sql = "SELECT * FROM " . $this->table_name ." WHERE `CUS_NAME` like '%" . $data . "%' OR `CUS_PM_PH_NO` like '%" . $data . "%' OR `CUS_ID` like '%".$data."%'";
-        $sql = "SELECT * FROM " . $this->table_name . " WHERE `CUS_NAME` like '%" . $data . "%' OR `CUS_PM_PH_NO` like '%" . $data . "%' OR `CUS_ID` like '%" . $data . "%' OR `CUS_DL_STATUS`= 1";
+        $sql = "SELECT * FROM " . $this->table_name . " WHERE (`CUS_NAME` like '%" . $data . "%' OR `CUS_PM_PH_NO` like '%" . $data . "%' OR `USER_ID` like '%" . $data . "%') AND (`CUS_DL_STATUS`= 1)";
+
+
         $stmt = $this->conn->prepare($sql);
 
         try {

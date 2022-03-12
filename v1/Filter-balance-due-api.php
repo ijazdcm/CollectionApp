@@ -31,13 +31,14 @@ if($_SERVER['REQUEST_METHOD'] === "POST"){
             $Due_obj->selected_plan_id=$data->PLAN_ID;
             $Due_obj->less_than_amount=$data->AMOUNT_LESS_THAN;
             $response=$Due_obj->get_balance_due_list();
+            
             http_response_code(200);
             echo json_encode(["status"=>"1","data"=>$response]);
         }
         else
         {
             http_response_code(200);
-            echo json_encode(["status"=>"0","data"=>"BOTH THE FEILD SHOULD BE NUMERIC VALUE"]);
+            echo json_encode(["status"=>"0","data"=>"BOTH THE FIELD SHOULD BE NUMERIC VALUE"]);
         }
   }
   else
