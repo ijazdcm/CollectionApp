@@ -7,13 +7,13 @@ class Admin{
 
 
   //table variable
-  private $admin_tabel;
+  private $admin_table;
 
 
   public function __construct($db)
   {
      $this->conn=$db;
-     $this->admin_tabel='admin_login';
+     $this->admin_table='admin_login';
   }
     //functions to perform tasks
    public function Check_hash($password,$hashed_string)
@@ -32,7 +32,7 @@ class Admin{
    { 
      $this->phonenumber=$phonenumber;
       
-      $sql="SELECT * FROM ".$this->admin_tabel." WHERE `PHONE_NUMBER`=:phonenumber";
+      $sql="SELECT * FROM ".$this->admin_table." WHERE `PHONE_NUMBER`=:phonenumber";
       $stmt=$this->conn->prepare($sql);
       $stmt->bindParam('phonenumber',$this->phonenumber);
 
@@ -55,7 +55,7 @@ class Admin{
    {
     $this->phonenumber=$phonenumber;
       
-    $sql="SELECT * FROM ".$this->admin_tabel." WHERE `PHONE_NUMBER`=:phonenumber";
+    $sql="SELECT * FROM ".$this->admin_table." WHERE `PHONE_NUMBER`=:phonenumber";
     $stmt=$this->conn->prepare($sql);
     $stmt->bindParam('phonenumber',$this->phonenumber);
 
@@ -78,7 +78,7 @@ class Admin{
    {
     
     
-    $sql="SELECT * FROM ".$this->admin_tabel." WHERE `PHONE_NUMBER`=:phonenumber";
+    $sql="SELECT * FROM ".$this->admin_table." WHERE `PHONE_NUMBER`=:phonenumber";
     $stmt=$this->conn->prepare($sql);
     $stmt->bindParam('phonenumber',$this->phonenumber);
 
